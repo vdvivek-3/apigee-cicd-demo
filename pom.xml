@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+https://maven.apache.org/xsd/maven-4.0.0.xsd">
+ 
+    <modelVersion>4.0.0</modelVersion>
+ 
+    <groupId>com.training.apigee</groupId>
+<artifactId>training-indian-air-flights-vs-code-013</artifactId>
+<version>1.0.0</version>
+<packaging>pom</packaging>
+ 
+    <name>training-indian-air-flights-vs-code-013</name>
+ 
+    <properties>
+<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<apigee.proxy.name>training-indian-air-flights-vs-code-013</apigee.proxy.name>
+</properties>
+ 
+    <build>
+<plugins>
+ 
+            <!-- Maven Resources Plugin -->
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-resources-plugin</artifactId>
+<version>3.3.1</version>
+ 
+                <executions>
+<execution>
+<id>copy-apigee-proxy</id>
+<phase>process-resources</phase>
+<goals>
+<goal>copy-resources</goal>
+</goals>
+ 
+                        <configuration>
+<outputDirectory>
+
+                                ${project.build.directory}/apiproxy
+</outputDirectory>
+ 
+                            <resources>
+<resource>
+<directory>
+
+                                        ${project.basedir}/apiproxy
+</directory>
+<filtering>false</filtering>
+</resource>
+</resources>
+</configuration>
+</execution>
+</executions>
+</plugin>
+ 
+            <!-- Apigee X Maven Deploy Plugin -->
+<plugin>
+<groupId>io.apigee.build-tools.enterprise4g</groupId>
+<artifactId>apigee-edge-maven-plugin</artifactId>
+<version>2.5.2</version>
+ 
+                <executions>
+ 
+                    <!-- Step 1: Configure and generate ZIP -->
+<execution>
+<id>configure-bundle</id>
+<phase>package</phase>
+<goals>
+<goal>configure</goal>
+</goals>
+</execution>
+ 
+                    <!-- Step 2: Deploy ZIP to Apigee X -->
+<execution>
+<id>deploy-bundle</id>
+<phase>install</phase>
+<goals>
+<goal>deploy</goal>
+</goals>
+</execution>
+ 
+                </executions>
+</plugin>
+ 
+        </plugins>
+</build>
+ 
+    <!-- Apigee X deployment profile -->
+<profiles>
+<profile>
+<id>eval</id>
+ 
+            <properties>
+<apigee.hosturl>https://apigee.googleapis.com</apigee.hosturl>
+<apigee.apiversion>v1</apigee.apiversion>
+<apigee.org>${org}</apigee.org>
+<apigee.env>${env}</apigee.env>
+<apigee.authtype>oauth</apigee.authtype>
+<apigee.bearer>${bearer}</apigee.bearer>
+<apigee.options>override</apigee.options>
+</properties>
+ 
+        </profile>
+</profiles>
+ 
+</project>
+
+ 

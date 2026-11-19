@@ -1,0 +1,25 @@
+<ProxyEndpoint name="default">
+ 
+ 
+  <PreFlow name="PreFlow">
+    <Request>
+      <Step>
+        <Name>SA-spike-arrest</Name>
+      </Step>
+      <Step>
+        <Name>VA-verify-api-key</Name>
+      </Step>
+      <Step>
+        <Name>Q-quota</Name>
+      </Step>
+    </Request>
+    <Response/>
+  </PreFlow>
+ 
+  <HTTPProxyConnection>
+    <BasePath>/training-indian-air-flights-vs-code-013</BasePath>
+  </HTTPProxyConnection>
+  <RouteRule name="backend">
+    <TargetEndpoint>backend</TargetEndpoint>
+  </RouteRule>
+</ProxyEndpoint>
